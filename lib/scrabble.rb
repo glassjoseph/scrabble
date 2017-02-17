@@ -1,11 +1,25 @@
+require 'pry'
+
 class Scrabble
 
+
   def score(word)
-    1
     word.upcase.chars.map do |letter|
       point_values[letter]
     end.reduce(:+)
   end
+
+  def score_with_multipliers(word, letter_multipliers, word_mulitiplier=1) 
+
+    word_score = word.chars.map.with_index do |letter, index|
+      score(letter) * letter_multipliers[index]
+    end.reduce(:+)
+
+    word_score *= word_mulitiplier 
+    word_score += 10 if word.length >= 7
+    word_score
+  end
+  
 
   def point_values
     {
@@ -19,3 +33,4 @@ class Scrabble
     }
   end
 end
+  
