@@ -2,6 +2,10 @@ class Scrabble
 
   def score(word)
     1
+    word.upcase.chars.map do |letter|
+      point_values[letter]
+    end.reduce(:+)
+    
   end
 
   def point_values
