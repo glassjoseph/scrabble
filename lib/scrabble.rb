@@ -7,6 +7,9 @@ class Scrabble
     word.upcase.chars.map do |letter|
       point_values[letter]
     end.reduce(:+)
+    word.upcase.chars.map do |letter|
+      point_values[letter]
+    end.reduce(:+)
   end
 
   def score_with_multipliers(word, letter_multipliers, word_mulitiplier=1) 
