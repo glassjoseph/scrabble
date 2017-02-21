@@ -18,11 +18,33 @@ class Scrabble
       score(letter) * letter_multipliers[index]
     end.reduce(:+)
 
-    word_score *= word_mulitiplier 
     word_score += 10 if word.length >= 7
+    word_score *= word_mulitiplier 
     word_score
   end
   
+  def highest_scoring_word(words)
+    highest = words.max_by{|word| score(word)}
+    #grab all words w/highest score
+    words.select!{ |word| score(word) == score(highest)}
+    #return 7 length word
+    words.each { |word| return word if word.length == 7}
+    words.max_by{ |word| -word.length}
+    
+
+
+    # if score(words[0]) == score(words[1])
+    #   return [words[0], words[1]].max_by {|word| -word.length}
+    # else 
+    #   words[0]
+    # end
+  end
+
+
+
+
+
+
 
   def point_values
     {
@@ -37,3 +59,7 @@ class Scrabble
   end
 end
   
+#  game = Scrabble.new
+#  words = ['home', 'word', 'hello', 'sound']
+# binding.pry
+# ""

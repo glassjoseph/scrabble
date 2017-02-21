@@ -33,8 +33,33 @@ class ScrabbleTest < Minitest::Test
   end
 
   def test_sparkle
-    score = Scrabble.new.score_with_multipliers('sparkle', [1,1,1,1,1,1,1], 2)
-    assert_equal 36, score
+    game = Scrabble.new
+    score = game.score_with_multipliers('sparkle', [1,2,1,3,1,2,1], 2) 
+    assert_equal 58, score
+  end
+
+  def test_highest_scoring_word
+    game = Scrabble.new
+    highest = game.highest_scoring_word(['home', 'word', 'hello', 'sound'])
+    assert_equal "home", highest
+  end
+  
+  def test_smaller_wins_a_tie
+    game = Scrabble.new
+    winner = game.highest_scoring_word(['hello', 'word', 'sound']) 
+    assert_equal "word", winner
+  end
+  
+  def test_all_7_bonus
+    game = Scrabble.new
+    winner = game.highest_scoring_word(['hello', 'word', 'sound']) 
+    assert_equal "word", winner
+  end
+
+  def test_perfect_tie_returns_first
+    game = Scrabble.new
+    winner = game.highest_scoring_word(['hi', 'word', 'ward'])
+    assert_equal "word", winner
   end
 
 end
